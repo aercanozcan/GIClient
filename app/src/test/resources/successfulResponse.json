@@ -1,0 +1,110 @@
+{
+  "result_count": 50324,
+  "images": [
+    {
+      "id": "482986682",
+      "asset_family": "creative",
+      "caption": "Shot of a young woman enjoying a cuddle with her cathttp://195.154.178.81/DATA/i_collage/pu/shoots/784179.jpg",
+      "collection_code": "EPL",
+      "collection_id": 712,
+      "collection_name": "E+",
+      "display_sizes": [
+        {
+          "is_watermarked": false,
+          "name": "thumb",
+          "uri": "https://media.gettyimages.com/photos/arent-you-the-cutest-picture-id482986682?b=1&k=6&m=482986682&s=170x170&h=GLd04Wka7Tw_F6awIAdouynagUOr0onFXNKXAQWtHG8="
+        }
+      ],
+      "license_model": "royaltyfree",
+      "max_dimensions": {
+        "height": 4912,
+        "width": 7360
+      },
+      "title": "Aren't you the cutest?!"
+    },
+    {
+      "id": "540444329",
+      "asset_family": "creative",
+      "caption": "Ginger kitten playing with a cardboard box.",
+      "collection_code": "FKF",
+      "collection_id": 348,
+      "collection_name": "Moment",
+      "display_sizes": [
+        {
+          "is_watermarked": false,
+          "name": "thumb",
+          "uri": "https://media.gettyimages.com/photos/this-way-up-picture-id540444329?b=1&k=6&m=540444329&s=170x170&h=3j8qNhgVNjQdcs2RqTDtNPOrpTI8evD7knBqzKUcgYo="
+        }
+      ],
+      "license_model": "royaltyfree",
+      "max_dimensions": {
+        "height": 3168,
+        "width": 4752
+      },
+      "title": "This Way Up"
+    },
+    {
+      "id": "539178307",
+      "asset_family": "creative",
+      "caption": "Woman kissing cute cat's head. Tender scene.",
+      "collection_code": "FKF",
+      "collection_id": 348,
+      "collection_name": "Moment",
+      "display_sizes": [
+        {
+          "is_watermarked": false,
+          "name": "thumb",
+          "uri": "https://media.gettyimages.com/photos/woman-kissing-cat-picture-id539178307?b=1&k=6&m=539178307&s=170x170&h=vBOP7qYPcXs8Cv8whs9vB9FzbQm30RWzuhNoBkBQgl0="
+        }
+      ],
+      "license_model": "royaltyfree",
+      "max_dimensions": {
+        "height": 3744,
+        "width": 5616
+      },
+      "title": "Woman kissing cat"
+    },
+    {
+      "id": "538530365",
+      "asset_family": "creative",
+      "caption": "A mixed breed puppy in the bathtub with soap suds on his head.",
+      "collection_code": "EPL",
+      "collection_id": 712,
+      "collection_name": "E+",
+      "display_sizes": [
+        {
+          "is_watermarked": false,
+          "name": "thumb",
+          "uri": "https://media.gettyimages.com/photos/puppy-in-bathtub-picture-id538530365?b=1&k=6&m=538530365&s=170x170&h=LQLo3qkOl0s8-o-T5vyKnNZneS2J9rz4mSB-hQ5faoQ="
+        }
+      ],
+      "license_model": "royaltyfree",
+      "max_dimensions": {
+        "height": 3000,
+        "width": 3000
+      },
+      "title": "Puppy in Bathtub"
+    },
+    {
+      "id": "466839729",
+      "asset_family": "creative",
+      "caption": "A happy smiling blond child holding a household cat in her arms.",
+      "collection_code": "FKF",
+      "collection_id": 348,
+      "collection_name": "Moment",
+      "display_sizes": [
+        {
+          "is_watermarked": false,
+          "name": "thumb",
+          "uri": "https://media.gettyimages.com/photos/happy-girl-with-cat-picture-id466839729?b=1&k=6&m=466839729&s=170x170&h=1gX5JcqX-rIb_BOlR-4sLbRv8FKUlva2WPZmHPsDZ_0="
+        }
+      ],
+      "license_model": "royaltyfree",
+      "max_dimensions": {
+        "height": 3744,
+        "width": 5616
+      },
+      "title": "Happy girl with cat"
+    }
+  ]
+}
