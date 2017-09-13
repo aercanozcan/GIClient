@@ -10,6 +10,7 @@ import dagger.Provides;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -37,10 +38,10 @@ public class RestModule {
                 .addInterceptor(logging)
                 .addNetworkInterceptor(new HeaderInterceptor())
                 .build();
-
         return new Retrofit.Builder()
                 .baseUrl(endPoint)
                 .client(httpClient)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }

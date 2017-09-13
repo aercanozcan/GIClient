@@ -12,7 +12,6 @@ public class GettyResponse<T> {
 
     @SerializedName("result_count")
     private int result_count;
-
     @SerializedName("images")
     private List<T> images;
 

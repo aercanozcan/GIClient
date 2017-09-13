@@ -4,10 +4,10 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+
 /**
  * Created by ercanozcan on 09/08/17.
  */
-
 public class Image {
     @SerializedName("id")
     private String id;

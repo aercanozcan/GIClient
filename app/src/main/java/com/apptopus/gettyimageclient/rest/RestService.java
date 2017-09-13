@@ -5,7 +5,9 @@ import com.apptopus.gettyimageclient.data.model.Image;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -36,11 +38,12 @@ public class RestService {
 
 
         @GET(VERSION + ACTION_IMAGES)
-        Call<GettyResponse<Image>> searchImages(@Query("phrase") String phrase);
+        Observable<Response<GettyResponse<Image>>> searchImages(@Query("phrase") String phrase);
 
         @GET(VERSION + ACTION_IMAGES)
-        Call<GettyResponse<Image>> searchImages(@Query("phrase") String phrase,
-                                                @Query("page") int page,
-                                                @Query("page_size") int pageSize);
+        Observable<Response<GettyResponse<Image>>> searchImages(@Query("phrase") String phrase,
+                                                                @Query("page") int page,
+                                                                @Query("page_size") int pageSize);
+
     }
 }

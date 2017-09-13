@@ -15,6 +15,12 @@ import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
@@ -47,21 +53,27 @@ public class RestServiceTest extends BaseTest {
         mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody(FixtureUtils.readFixture("successfulResponse.json")));
         restService = new RestService(retrofit);
         final CountDownLatch countDownLatch = new CountDownLatch(1);
-        restService.gettyService().searchImages("kitties").enqueue(new Callback<GettyResponse<Image>>() {
-            @Override
-            public void onResponse(Call<GettyResponse<Image>> call, Response<GettyResponse<Image>> response) {
-                assertThat("Response code should be 200", response.code(), is(equalTo(200)));
-                assertThat("Response envelope is  null", response.body(), is(notNullValue()));
-                assertThat("Image count is an unexpected value", response.body().getImages().size(), is(equalTo(5)));
-                countDownLatch.countDown();
-            }
+        restService.gettyService().searchImages("kitties").subscribeOn(Schedulers.io())
+                .subscribe(new DisposableObserver<Response<GettyResponse<Image>>>() {
+                    @Override
+                    public void onNext(@NonNull Response<GettyResponse<Image>> response) {
+                        assertThat("Response code should be 200", response.code(), is(equalTo(200)));
+                        assertThat("Response envelope is  null", response.body(), is(notNullValue()));
+                        assertThat("Image count is an unexpected value", response.body().getImages().size(), is(equalTo(5)));
+                        countDownLatch.countDown();
+                    }
 
-            @Override
-            public void onFailure(Call<GettyResponse<Image>> call, Throwable t) {
-                Assert.fail("Unxpected response :" + t.getMessage());
-                countDownLatch.countDown();
-            }
-        });
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Assert.fail("Unxpected response :" + e.getMessage());
+                        countDownLatch.countDown();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
         countDownLatch.await(2, TimeUnit.SECONDS);
     }
 
@@ -83,7 +95,28 @@ public class RestServiceTest extends BaseTest {
         Retrofit retrofit = retrofitBuilder.client(client).build();
         mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody(FixtureUtils.readFixture("successfulResponse.json")));
         restService = new RestService(retrofit);
-        restService.gettyService().searchImages("kitties").execute();
+        restService.gettyService().searchImages("kitties").subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Response<GettyResponse<Image>>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull Response<GettyResponse<Image>> response) {
+
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
 
     }
 

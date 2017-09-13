@@ -6,6 +6,11 @@ import com.apptopus.gettyimageclient.rest.RestService;
 
 import java.io.IOException;
 
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -21,6 +26,8 @@ public class GettyImageActivityPresenter implements GettyImageActivityContract.O
 
     GettyImageActivityContract.View view;
 
+    Observable<Response<GettyResponse<Image>>> request;
+
     public GettyImageActivityPresenter(RestService restService, GettyImageActivityContract.View view) {
         this.restService = restService;
         this.view = view;
@@ -29,27 +36,36 @@ public class GettyImageActivityPresenter implements GettyImageActivityContract.O
     @Override
     public void fetchImages(String phrase, int page, int pageSize) {
         view.showProgress();
-        restService.gettyService().searchImages(phrase, page, pageSize).enqueue(new Callback<GettyResponse<Image>>() {
-            @Override
-            public void onResponse(Call<GettyResponse<Image>> call, Response<GettyResponse<Image>> response) {
-                if (response.isSuccessful()) {
-                    view.showImages(response.body().getImages());
-                } else {
-                    try {
-                        view.showErrorDialog(new Throwable(response.errorBody().string()));
-                    } catch (IOException e) {
-                        e.printStackTrace();
+        request = restService.gettyService().searchImages(phrase, page, pageSize);
+        request.subscribeOn(Schedulers.io())
+                .cache()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<Response<GettyResponse<Image>>>() {
+                    @Override
+                    public void onNext(@NonNull Response<GettyResponse<Image>> response) {
+                        if (response.isSuccessful()) {
+                            view.showImages(response.body().getImages());
+                        } else {
+                            try {
+                                view.showErrorDialog(new Throwable(response.errorBody().string()));
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        view.hideProgress();
                     }
-                }
-                view.hideProgress();
-            }
 
-            @Override
-            public void onFailure(Call<GettyResponse<Image>> call, Throwable t) {
-                view.showErrorDialog(t);
-                view.hideProgress();
-            }
-        });
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        view.showErrorDialog(e);
+                        view.hideProgress();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
 }
